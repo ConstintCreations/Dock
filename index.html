@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    <title>Dock</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20class='ionicon'%20viewBox='0%200%20512%20512'%3E%3Crect%20x='64'%20y='176'%20width='384'%20height='256'%20rx='28.87'%20ry='28.87'%20fill='none'%20stroke='%23ffffff'%20stroke-linejoin='round'%20stroke-width='32'/%3E%3Cpath%20stroke='%23ffffff'%20stroke-linecap='round'%20stroke-miterlimit='10'%20stroke-width='32'%20d='M144%2080h224M112%20128h288'/%3E%3C/svg%3E">
+</head>
+<body>
+    <h1><ion-icon name="albums-outline"></ion-icon>Dock</h1>
+    <input type="text" id="search-bar" placeholder="Search...">
+    <div class="shortcut-grid">
+        <button id="shortcut-add">
+            <ion-icon name="add-circle-outline"></ion-icon>
+        </button>
+    </div>
+
+    <div class="modal">
+        <div class="modal-content">
+            <h2>Create New Shortcut</h2>
+            <input type="text" id="shortcut-name-input" placeholder="Shortcut Name">
+            <input type="url" id="shortcut-url-input" placeholder="Shortcut URL">
+            <div class="modal-buttons">
+                <p id="alert-box">Please enter both name and URL</p>
+                <button id="add-button">Add</button>
+                <button id="cancel-button">Cancel</button>
+                <button id="save-button">Save</button>
+                <button id="delete-button">Delete</button>
+            </div>
+        </div>
+    </div>
+
+    <button class="reset">Clear Data</button>
+</body>
+</html>
