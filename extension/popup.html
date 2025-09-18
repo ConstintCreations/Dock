@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="popup.css">
+    <script src="popup.js" defer></script>
+    <title>Dock</title>
+</head>
+<body>
+    <input type="text" id="search-bar" placeholder="Search...">
+    <div class="shortcut-grid">
+        <button id="shortcut-add">
+            <svg xmlns="http://www.w3.org/2000/svg" class="ionicon" viewBox="0 0 512 512"><path d="M448 256c0-106-86-192-192-192S64 150 64 256s86 192 192 192 192-86 192-192z" fill="none" stroke="currentColor" stroke-miterlimit="10" stroke-width="32"/><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32" d="M256 176v160M336 256H176"/></svg>
+        </button>
+    </div>
+
+    <div class="modal">
+        <div class="modal-content">
+            <h2>Create New Shortcut</h2>
+            <input type="text" id="shortcut-name-input" placeholder="Shortcut Name">
+            <input type="url" id="shortcut-url-input" placeholder="Shortcut URL">
+            <div class="modal-buttons">
+                <p id="alert-box">Please enter both name and URL</p>
+                <button id="add-button">Add</button>
+                <button id="cancel-button">Cancel</button>
+                <button id="save-button">Save</button>
+                <button id="delete-button">Delete</button>
+            </div>
+        </div>
+    </div>
+
+    <button class="reset">Clear Data</button>
+</body>
+</html>

@@ -144,8 +144,9 @@ function closeModal() {
 }
 
 document.querySelector(".reset").addEventListener("click", () => {
-    if (confirm("Are you sure you want to clear all data? This action cannot be undone.")) {
-        localStorage.clear();
+    if (confirm("Are you sure you want to clear all data?")) {
+        chrome.storage.local.clear();
+        document.querySelectorAll(".shortcut-item").forEach(el => el.remove());
         loadShortcuts();
     }
 });
@@ -155,22 +156,39 @@ function saveShortcuts() {
     document.querySelectorAll(".shortcut-item").forEach(shortcut => {
         const name = shortcut.querySelector(".shortcut-name").textContent;
         const url = shortcut.href;
-        shortcuts.push({name, url});
+        shortcuts.push({ name, url });
     });
-    localStorage.setItem("dockShortcuts", JSON.stringify(shortcuts));
+
+    chrome.storage.local.set({ dockShortcuts: shortcuts });
 }
 
-function loadShortcuts() {
-    const shortcuts = JSON.parse(localStorage.getItem("dockShortcuts") || '[{"name":"Google","url":"https://www.google.com"}]');
-    shortcuts.forEach(async shortcut => {
-        const shortcutHTML = `
-            <a class="shortcut-item" href="${shortcut.url}" target="_blank">
-                <img src="${await getFavicon(shortcut.url)}" alt="${shortcut.name}">
-                <p class="shortcut-name">${shortcut.name}</p>
-            </a>
-        `;
-        shortcutAddButton.insertAdjacentHTML("beforebegin", shortcutHTML);
+
+async function loadShortcuts() {
+    chrome.storage.local.get("dockShortcuts", async (result) => {
+        let shortcuts = result.dockShortcuts;
+
+        if (shortcuts === undefined) {
+            shortcuts = [{ name: "Google", url: "https://www.google.com" }];
+            chrome.storage.local.set({ dockShortcuts: shortcuts });
+        }
+
+        document.querySelectorAll(".shortcut-item").forEach(el => el.remove());
+
+        const shortcutAddButton = document.querySelector("#shortcut-add");
+
+        if (shortcuts) {
+            for (const shortcut of shortcuts) {
+                const shortcutHTML = `
+                    <a class="shortcut-item" href="${shortcut.url}" target="_blank">
+                        <img src="${await getFavicon(shortcut.url)}" alt="${shortcut.name}">
+                        <p class="shortcut-name">${shortcut.name}</p>
+                    </a>
+                `;
+                shortcutAddButton.insertAdjacentHTML("beforebegin", shortcutHTML);
+            }
+        }
     });
 }
+
 
 window.addEventListener("DOMContentLoaded", loadShortcuts);

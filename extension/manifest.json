@@ -1,0 +1,28 @@
+{
+  "manifest_version": 3,
+  "name": "Dock",
+  "version": "1.0",
+  "description": "Quick access to better shortcuts",
+  "action": {
+    "default_popup": "popup.html"
+  },
+  "permissions": ["storage", "scripting", "activeTab"],
+  "content_scripts": [
+    {
+      "matches": ["https://www.google.com/"],
+      "js": ["content.js"],
+      "css": ["content.css"],
+      "run_at": "document_end"
+    }, 
+    {
+      "matches": ["https://constintcreations.github.io/Dock/", "http://127.0.0.1:5500/"],
+      "js": ["storagesync.js"]
+    }
+  ],
+  "icons": {
+    "16": "assets/logos/logo16.png",
+    "32": "assets/logos/logo32.png",
+    "48": "assets/logos/logo48.png",
+    "128": "assets/logos/logo128.png"
+  }
+}
