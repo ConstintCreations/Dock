@@ -146,7 +146,7 @@ function closeModal() {
 document.querySelector(".reset").addEventListener("click", () => {
     if (confirm("Are you sure you want to clear all data? This action cannot be undone.")) {
         localStorage.clear();
-        loadShortcuts();
+        location.reload();
     }
 });
 
